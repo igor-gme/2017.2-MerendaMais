@@ -1,8 +1,11 @@
 const initialState = {
   counselor: {
     id: 0,
-    token: '',
-    name: ''
+    url: '',
+    cpf: '',
+    email: '',
+    phone: '',
+    first_name: ''
   }
 }
 

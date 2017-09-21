@@ -1,32 +1,26 @@
-import React from 'react'
-import {Text, ScrollView, View, TextInput, TouchableOpacity} from 'react-native'
+import React from 'react';
+import {Text, ScrollView, View, TextInput, TouchableOpacity} from 'react-native';
+import { connect } from 'react-redux';
+import { asyncCreateCounselor } from '../actions/counselorActions';
 
-export default class RegisterScreen extends React.Component {
+class RegisterScreen extends React.Component {
 
   constructor(props){
     super(props)
 
     this.state = {
-      CPF: '',
-      name: '',
+      cpf: '',
       email:'',
-      telefone: '',
-      cargo: '',
-      segment: '',
-      CAE_Type: '',
-      CAE: '',
+      phone: '',
+      first_name: '',
     }
   }
 
   saveRegister() {
-     console.log(this.state.CPF);
-     console.log(this.state.name);
+     console.log(this.state.cpf);
+     console.log(this.state.first_name);
      console.log(this.state.email);
-     console.log(this.state.telefone);
-     console.log(this.state.cargo);
-     console.log(this.state.segment);
-     console.log(this.state.CAE_Type);
-     console.log(this.state.CAE);
+     console.log(this.state.phone);
   }
 
   render() {
@@ -48,7 +42,7 @@ export default class RegisterScreen extends React.Component {
         placeholderTextColor = '#95a5a6'
         style={styles.InputInfo}
         returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({CPF:text})}
+        onChangeText={(text) => this.setState({cpf:text})}
       />
       <Text style={styles.container}>     Nome</Text>
       <TextInput
@@ -56,7 +50,7 @@ export default class RegisterScreen extends React.Component {
         placeholderTextColor = '#95a5a6'
         style={styles.InputInfo}
         returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({name:text})}
+        onChangeText={(text) => this.setState({first_name:text})}
       />
       <Text style={styles.container}>     Email</Text>
       <TextInput
@@ -64,49 +58,18 @@ export default class RegisterScreen extends React.Component {
         placeholderTextColor = '#95a5a6'
         style={styles.InputInfo}
         returnKeyLabel = {"next"}
+        onChangeText={(text) => this.setState({email:text})}
       />
       <Text style={styles.container}>     Telefone</Text>
       <TextInput
         placeholder = "Digite o seu telefone"
         placeholderTextColor = '#95a5a6'
-        onChangeText={(text) => this.setState({email:text})}
         style={styles.InputInfo}
         returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({telefone:text})}
+        onChangeText={(text) => this.setState({phone:text})}
       />
-      <Text style={styles.container}>     Cargo</Text>
-      <TextInput
-        placeholder = "Escolha seu cargo"
-        placeholderTextColor = '#95a5a6'
-        style={styles.InputInfo}
-        returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({cargo:text})}
-      />
-     <Text style={styles.container}>     Segmento</Text>
-      <TextInput
-        placeholder = "Escolha seu segmento"
-        placeholderTextColor = '#95a5a6'
-        style={styles.InputInfo}
-        returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({segment:text})}
-      />
-      <Text style={styles.container}>     Tipo do CAE</Text>
-      <TextInput
-        placeholder = "Escolha o tipo do seu CAE"
-        placeholderTextColor = '#95a5a6'
-        style={styles.InputInfo}
-        returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({CAE_Type:text})}
-      />
-      <Text style={styles.container}>     CAE</Text>
-      <TextInput
-        placeholder = "Lista com o CAE do seu município/estado"
-        placeholderTextColor = '#95a5a6'
-        style={styles.InputInfo}
-        returnKeyLabel = {"next"}
-        onChangeText={(text) => this.setState({CAE:text})}
-      />
-      <TouchableOpacity  onPress={() => this.saveRegister()}
+
+      <TouchableOpacity  onPress={() => this.props.createUser(this.state)}
         style= {styles.buttonContainer}>
         <Text style={styles.buttonText}>Concluir</Text>
       </TouchableOpacity>
@@ -125,6 +88,24 @@ export default class RegisterScreen extends React.Component {
   );
   }
 }
+
+const mapStateToProps = (state) => {
+    return{
+        counselor: state.counselor
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        createUser(userData){
+            dispatch(asyncCreateCounselor(userData));
+        }
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
 
 const styles = {
 principal: {

@@ -9,9 +9,11 @@ const counselorReducer = (state = {}, action) => {
       case SET_COUNSELOR:
           return {
             id: action.counselor.id,
-            token: action.counselor.token,
-            name: action.counselor.name
-
+            first_name: action.counselor.first_name,
+            email: action.counselor.cpf,
+            phone: action.counselor.phone,
+            cpf: action.counselor.cpf,
+            url: action.counselor.url
           };
 
         default:
