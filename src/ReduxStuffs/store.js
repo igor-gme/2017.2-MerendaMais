@@ -1,7 +1,6 @@
 import thunk from 'redux-thunk';
 import {createStore, combineReducers, applyMiddleware } from 'redux';
 import initialState from './initialState';
-import promise from 'redux-promise'
 
 import counselorReducer from './reducers/counselorReducer';
 
