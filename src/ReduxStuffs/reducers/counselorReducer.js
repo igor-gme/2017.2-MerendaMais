@@ -2,7 +2,7 @@ import initialState from '../initialState';
 import { SET_COUNSELOR } from '../actions';
 
 //action = {type: ACTION_TYPE, pyload: someDataHere}
-const counselorReducer = (state = {}, action) => {
+const counselorReducer = (state = initialState.counselor, action) => {
     if (action === undefined) return state;
 
     switch (action.type) {
